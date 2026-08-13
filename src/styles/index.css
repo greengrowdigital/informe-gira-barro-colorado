@@ -1,0 +1,260 @@
+@import 'tailwindcss';
+
+/* ──────────────────────────────────────────────────────────────
+   Sistema de diseño — "Lámina de herbario"
+   El rosa es la superficie (la bráctea de la heliconia); el verde
+   del bosque es la tinta. Documento claro, de día, para leerse.
+   ────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Superficies rosadas, de la más clara a la más saturada */
+  --color-petal-50: oklch(0.982 0.012 14);
+  --color-petal-100: oklch(0.958 0.022 13);
+  --color-petal-200: oklch(0.928 0.036 11);
+  --color-petal-300: oklch(0.888 0.052 10);
+  --color-petal-400: oklch(0.828 0.078 9);
+
+  /* Tinta: el verde del sotobosque, sobre papel rosado */
+  --color-moss-900: oklch(0.245 0.045 152);
+  --color-moss-700: oklch(0.375 0.048 151);
+  --color-moss-500: oklch(0.475 0.05 150);
+  --color-moss-300: oklch(0.66 0.045 148);
+
+  /* Acento floral: heliconia */
+  --color-bloom-700: oklch(0.435 0.165 12);
+  --color-bloom-600: oklch(0.515 0.192 14);
+  --color-bloom-500: oklch(0.605 0.196 16);
+  --color-bloom-300: oklch(0.775 0.13 14);
+
+  /* Acento vegetal: hoja nueva */
+  --color-leaf-700: oklch(0.415 0.115 148);
+  --color-leaf-600: oklch(0.49 0.132 149);
+  --color-leaf-400: oklch(0.685 0.145 146);
+
+  /* Trazo */
+  --color-line-strong: oklch(0.78 0.05 10);
+  --color-line-soft: oklch(0.868 0.032 10);
+
+  --font-display: 'Young Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Schibsted Grotesk', 'Segoe UI', system-ui, sans-serif;
+
+  /* Escala fluida, ratio ≈1.33 */
+  --text-note: clamp(0.8rem, 0.77rem + 0.14vw, 0.88rem);
+  --text-base: clamp(1.03rem, 0.99rem + 0.2vw, 1.15rem);
+  --text-lede: clamp(1.22rem, 1.1rem + 0.6vw, 1.55rem);
+  --text-h3: clamp(1.35rem, 1.15rem + 0.9vw, 1.9rem);
+  --text-h2: clamp(1.85rem, 1.35rem + 2.2vw, 3.1rem);
+  --text-h1: clamp(2.4rem, 1.5rem + 4vw, 4.5rem);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  --z-raised: 10;
+  --z-sticky: 30;
+  --z-dialog: 70;
+  --z-header: 80;
+  --z-skip: 90;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --gutter: clamp(1.15rem, 4.5vw, 4.5rem);
+    --bar-h: 4.5rem;
+  }
+
+  * {
+    min-width: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: color-mix(in oklab, var(--color-bloom-500) 20%, transparent);
+  }
+
+  body {
+    background-color: var(--color-petal-100);
+    color: var(--color-moss-900);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    /* Schibsted Grotesk es compacta: necesita más aire entre líneas
+       y una pizca de tracking para no leerse apretada. */
+    line-height: 1.78;
+    letter-spacing: 0.006em;
+    word-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :where(a, button, [tabindex], summary):focus-visible {
+    outline: 2px solid var(--color-bloom-600);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  :where(h2, h3, section)[id] {
+    scroll-margin-top: calc(var(--bar-h) + 2.5rem);
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-bloom-300) 70%, transparent);
+    color: var(--color-moss-900);
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-petal-200);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-petal-400);
+    border-radius: 99px;
+    border: 3px solid var(--color-petal-200);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-bloom-300);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  .sheet {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .column {
+    max-width: 66ch;
+  }
+
+  .lede {
+    font-size: var(--text-lede);
+    line-height: 1.56;
+    letter-spacing: 0.002em;
+    color: var(--color-moss-700);
+  }
+
+  /* Etiqueta de lámina: versalitas espaciadas, sin monoespaciada */
+  .specimen-label {
+    font-family: var(--font-body);
+    font-size: 0.71rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-moss-500);
+  }
+
+  /* Papel: fibra apenas perceptible bajo el rosa */
+  .paper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.22'/%3E%3C/svg%3E");
+  }
+
+  .underline-grow {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms var(--ease-out-quint);
+  }
+  .underline-grow:hover {
+    background-size: 100% 1.5px;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Hojas que bajan girando: el movimiento va hacia abajo, no hacia arriba */
+@keyframes leaf-fall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.75;
+  }
+  92% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(var(--drift, 40px), 108vh, 0) rotate(var(--spin, 220deg));
+    opacity: 0;
+  }
+}
+
+/* Enfocar unos binoculares: de borroso a nítido */
+@keyframes focus-in {
+  from {
+    filter: blur(11px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes trail-draw {
+  from {
+    stroke-dashoffset: var(--len, 1200);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  @keyframes focus-in {
+    from,
+    to {
+      filter: none;
+      opacity: 1;
+    }
+  }
+}
