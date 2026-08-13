@@ -1,8 +1,10 @@
 import { useLanguage } from '../i18n/LanguageContext.jsx'
-import { equipo, justificacion, objetivos, proposito } from '../content/inicio.js'
+import { bandaPortada, carrete, equipo, justificacion, objetivos, proposito } from '../content/inicio.js'
 import { guide, students, teachers } from '../content/site.js'
 import Hero from '../components/Hero.jsx'
 import NextSections from '../components/NextSections.jsx'
+import ImmersiveBand from '../components/ImmersiveBand.jsx'
+import PhotoMarquee from '../components/PhotoMarquee.jsx'
 import { FocusIn, Reveal, Stagger, StaggerItem } from '../components/motion/Reveal.jsx'
 import { Plate } from '../components/Photo.jsx'
 import usePageTitle from '../hooks/usePageTitle.js'
@@ -90,6 +92,14 @@ export default function Portada() {
             </Stagger>
           </div>
         </section>
+
+        <ImmersiveBand
+          src={bandaPortada.src}
+          alt={bandaPortada.alt}
+          quote={bandaPortada.quote}
+          attribution={bandaPortada.attribution}
+          objectPosition={bandaPortada.objectPosition}
+        />
 
         {/* Objetivos */}
         <section className="sheet py-[clamp(3.5rem,9vh,6rem)]" aria-labelledby="objetivos">
@@ -188,6 +198,8 @@ export default function Portada() {
             </div>
           </div>
         </section>
+
+        <PhotoMarquee images={carrete.images} label={carrete.label} />
 
         <NextSections />
       </main>

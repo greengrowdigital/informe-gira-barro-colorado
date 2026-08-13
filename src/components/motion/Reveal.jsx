@@ -107,15 +107,25 @@ export function Stagger({ children, className, step = 0.05, as: Tag = 'div' }) {
   )
 }
 
-export function StaggerItem({ children, className, as: Tag = 'div', y = 14, __state = 'idle', __delay = 0 }) {
-  const style =
+export function StaggerItem({
+  children,
+  className,
+  as: Tag = 'div',
+  y = 14,
+  style: ownStyle,
+  __state = 'idle',
+  __delay = 0,
+}) {
+  const motionStyle =
     __state === 'idle'
-      ? undefined
+      ? null
       : {
           opacity: __state === 'hidden' ? 0 : 1,
           transform: __state === 'hidden' ? `translate3d(0, ${y}px, 0)` : 'translate3d(0,0,0)',
           transition: `opacity 540ms ${EASE} ${__delay}s, transform 540ms ${EASE} ${__delay}s`,
         }
+
+  const style = ownStyle || motionStyle ? { ...ownStyle, ...motionStyle } : undefined
 
   return (
     <Tag className={className} style={style}>

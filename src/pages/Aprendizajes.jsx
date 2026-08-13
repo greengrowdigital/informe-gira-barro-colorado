@@ -1,7 +1,8 @@
 import { useLanguage } from '../i18n/LanguageContext.jsx'
-import { aprendizajesIntro, conclusiones, ejes, evaluacion } from '../content/aprendizajes.js'
+import { aprendizajesIntro, bandaAprendizajes, conclusiones, ejes, evaluacion } from '../content/aprendizajes.js'
 import PageHead from '../components/PageHead.jsx'
 import NextSections from '../components/NextSections.jsx'
+import ImmersiveBand from '../components/ImmersiveBand.jsx'
 import { FocusIn, Reveal, Stagger, StaggerItem } from '../components/motion/Reveal.jsx'
 import Photo from '../components/Photo.jsx'
 import usePageTitle from '../hooks/usePageTitle.js'
@@ -116,6 +117,15 @@ export default function Aprendizajes() {
             </div>
           </div>
         </section>
+
+        <ImmersiveBand
+          src={bandaAprendizajes.src}
+          alt={bandaAprendizajes.alt}
+          quote={bandaAprendizajes.quote}
+          attribution={bandaAprendizajes.attribution}
+          objectPosition={bandaAprendizajes.objectPosition}
+          height="short"
+        />
 
         {/* Conclusiones */}
         <section className="sheet py-[clamp(3rem,8vh,5rem)]" aria-labelledby="conclusiones">

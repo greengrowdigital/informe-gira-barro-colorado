@@ -90,6 +90,23 @@ export const evaluacion = {
   },
 }
 
+export const bandaAprendizajes = {
+  src: '/img/bosque-abierto',
+  objectPosition: '50% 45%',
+  alt: {
+    es: 'Zona de bosque abierta donde la luz llega hasta el sotobosque, en uno de los senderos.',
+    en: 'An open patch of forest where light reaches the understory, on one of the trails.',
+  },
+  quote: {
+    es: 'Observar las plantas, los animales y el trabajo de los investigadores hizo que los temas fueran más fáciles de entender.',
+    en: 'Seeing the plants, the animals and the researchers’ work made the topics far easier to understand.',
+  },
+  attribution: {
+    es: 'De las conclusiones del informe',
+    en: 'From the report’s conclusions',
+  },
+}
+
 export const conclusiones = {
   heading: { es: 'Conclusiones', en: 'Conclusions' },
   items: [

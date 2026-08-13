@@ -12,7 +12,11 @@ function SpecimenCard({ item, index, kind }) {
   const accent = kind === 'flora' ? 'var(--color-leaf-700)' : 'var(--color-bloom-700)'
 
   return (
-    <StaggerItem as="li" className="flex flex-col border border-line-soft bg-petal-50 p-5 sm:p-6">
+    <StaggerItem
+      as="li"
+      className="flex flex-col border border-line-soft border-t-[3px] bg-petal-50 p-5 sm:p-6"
+      style={{ borderTopColor: accent }}
+    >
       <div className="flex items-baseline justify-between gap-3">
         <span className="tabular text-[0.8rem] font-semibold" style={{ color: accent }}>
           {kind === 'flora' ? 'F' : 'A'}

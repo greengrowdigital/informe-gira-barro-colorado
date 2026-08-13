@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 import { facts, site } from '../content/site.js'
 import Photo from './Photo.jsx'
+import CountUp from './CountUp.jsx'
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -198,16 +199,15 @@ export default function Hero() {
             <div key={fact.label.es}>
               <dt className="specimen-label m-0 text-[0.58rem]">{t(fact.label)}</dt>
               <dd className="m-0 mt-1.5 ml-0 flex items-baseline gap-1.5">
-                <span
+                <CountUp
+                  value={fact.value}
                   className="tabular text-moss-900"
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(1.6rem, 1.2rem + 1.5vw, 2.35rem)',
                     lineHeight: 1,
                   }}
-                >
-                  {fact.value}
-                </span>
+                />
                 <span className="text-[0.85rem] text-moss-500">{t(fact.unit)}</span>
               </dd>
             </div>

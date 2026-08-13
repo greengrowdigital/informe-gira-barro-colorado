@@ -48,6 +48,39 @@ export const justificacion = {
   ],
 }
 
+export const bandaPortada = {
+  src: '/img/dosel-arriba',
+  objectPosition: '50% 55%',
+  alt: {
+    es: 'Dosel del bosque visto desde el sendero, con las copas cerrándose sobre el camino.',
+    en: 'The forest canopy seen from the trail, treetops closing over the path.',
+  },
+  quote: {
+    es: 'Seis senderos. Tres horas y doce minutos. Un solo bosque.',
+    en: 'Six trails. Three hours and twelve minutes. One forest.',
+  },
+  attribution: {
+    es: 'Isla Barro Colorado · 18 de julio de 2026',
+    en: 'Barro Colorado Island · 18 July 2026',
+  },
+}
+
+export const carrete = {
+  label: { es: 'Del carrete del día', en: 'From the day’s roll' },
+  images: [
+    'guia-palma',
+    'follaje-verde',
+    'fruto-espinoso',
+    'raices-zancudas',
+    'hoja-mano',
+    'nido-termitas',
+    'escaleras-sendero',
+    'hongos-roca',
+    'estudiante-tronco',
+    'copa-arbol',
+  ],
+}
+
 export const objetivos = {
   heading: { es: 'Objetivos', en: 'Objectives' },
   general: {

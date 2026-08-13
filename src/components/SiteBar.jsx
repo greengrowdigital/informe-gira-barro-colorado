@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 import { nav, site } from '../content/site.js'
 
@@ -11,6 +11,10 @@ export default function SiteBar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const panelRef = useRef(null)
   const triggerRef = useRef(null)
+
+  // Cuánto lleva leído de la sección actual del informe
+  const { scrollYProgress } = useScroll()
+  const read = useSpring(scrollYProgress, { stiffness: 130, damping: 28, restDelta: 0.001 })
 
   useEffect(() => {
     setMenuOpen(false)
@@ -152,6 +156,15 @@ export default function SiteBar() {
             </button>
           </div>
         </div>
+
+        <motion.div
+          className="h-[2px] origin-left"
+          style={{
+            scaleX: read,
+            background: 'linear-gradient(to right, var(--color-bloom-600), var(--color-leaf-600))',
+          }}
+          aria-hidden="true"
+        />
       </header>
 
       <AnimatePresence>
