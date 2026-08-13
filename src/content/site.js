@@ -26,10 +26,10 @@ export const facts = [
 export const teachers = ['Edwin Loaiza', 'Diego Hill']
 
 export const students = [
+  'Hillary Yuen',
   'Sofía Martez',
   'Andrea Guerra',
   'Catarina Tejada',
-  'Hillary Yuen',
   'Tomás Tejada',
 ]
 
